@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>Orders</h1>
+        <ul>
+            {% for order in orders %}
+                <li>Заказ номер:{{ order.id }}. 
+                    {% if filter %} Фильтр: {{ filter }} {% endif %}
+                </li>
+                <ol>
+                    {% for item in order.positions.all %}
+                        {% if filter <= item.product.price %}
+                            <li>{{ item.product.name }} - {{ item.product.price }} (кол.: {{ item.quantity }} шт.)</li>
+                        {% endif %}
+                    {% endfor %}
+                </ol>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
